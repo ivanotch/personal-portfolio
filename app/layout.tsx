@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Roboto_Mono, Inter } from "next/font/google";
+import { Poppins, Roboto_Mono, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -10,6 +10,11 @@ const poppins = Poppins({
 
 const roboto = Roboto_Mono({
   variable: "--font-roboto-mono",
+  subsets: ["latin"],
+});
+
+const play = Playfair_Display({
+  variable: "--font-play-fair",
   subsets: ["latin"],
 });
 
@@ -26,7 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} ${roboto.variable} ${inter.variable} antialiased`}>
+      <body className={`${poppins.variable} ${roboto.variable} ${play.variable} ${inter.variable} antialiased`}>
         <div>{children}</div>
       </body>
     </html>
