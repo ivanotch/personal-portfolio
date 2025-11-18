@@ -79,11 +79,11 @@ export default function Nav() {
                 className="ml-[30px] text-[1.1rem] flex gap-2 items-center font-poppins font-[600]"
             >
                 <Slack size={24} ref={slackRef} color="#008000" />
-                <div className="relative overflow-hidden h-[1.2em] w-[8rem]">
-                    <div ref={ivanotchRef} className="absolute top-0 left-0 w-full">
+                <div className="mb-2 relative overflow-hidden h-[1.2em] w-[8rem]">
+                    <div ref={ivanotchRef} className=" absolute top-0 left-0 w-full">
                         IVANOTCH
                     </div>
-                    <div ref={realnameRef} className="absolute top-0 left-0 w-full">
+                    <div ref={realnameRef} className=" absolute top-0 left-0 w-full">
                         Ivan Babida
                     </div>
                 </div>

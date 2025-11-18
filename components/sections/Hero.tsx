@@ -46,7 +46,7 @@ export default function Hero() {
     }
 
     return (
-        <div className="h-[100vh] bg-[#C1DDDF]">
+        <div className="h-[100vh] rounded-lg bg-[#C1DDDF]">
             <Nav />
 
             <div className="absolute top-[40%] left-[5%]">
