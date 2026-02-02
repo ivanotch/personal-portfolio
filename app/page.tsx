@@ -1,7 +1,8 @@
 'use client'
-import Advertise from "@/components/sections/advertise";
-import Hero from "@/components/sections/Hero";
+import Advertise from "@/app/sections/advertise";
+import Hero from "@/app/sections/Hero";
 import {useEffect} from 'react'
+import Projects from "./sections/Projects";
 
 export default function Home() {
 
@@ -18,6 +19,7 @@ export default function Home() {
     <>
       <Hero />
       <Advertise />
+      <Projects />
     </>
   );
 }
