@@ -14,6 +14,7 @@ import { FaJava } from "react-icons/fa";
 import { FaGitAlt } from "react-icons/fa";
 import { SiMongodb } from "react-icons/si";
 import SkillCard from "@/components/SkillCard";
+import { useScroll, useTransform, motion } from "framer-motion";
 
 export default function Skills() {
 
@@ -101,7 +102,16 @@ export default function Skills() {
         },
     ]
 
+
+
     const bodyRef = useRef<HTMLElement>(null);
+
+    const {scrollYProgress} = useScroll({
+        target: bodyRef,
+        offset: ["start end", "end start"]
+    })
+
+    const height = useTransform(scrollYProgress, [0, 0.95], [50, 0]);
 
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -138,14 +148,15 @@ export default function Skills() {
     return (
         <main
             ref={bodyRef}
-            className=""
+            className="relative"
             data-bg-color="#1D1D1D"
+            
         >
             <div className="h-screen flex mb-[1rem] items-center justify-center">
                 <h1 className=" text-white text-9xl tracking-tight font-semibold font-inter leading-none">What Do I Do?</h1>
             </div>
 
-            <div className="relative ">
+            <div className="relative mb-[1rem]">
 
                 <div
                     className="
@@ -192,6 +203,11 @@ export default function Skills() {
                     </h2>
                 </div>
             </div>
+
+            <motion.div style={{height}} className="relative  ">
+                <div className="shadow-[0px_60px_50px_rgba(0,0,0,0.248)] absolute h-[1550%] w-[110%] left-[-10%] bg-[#1d1d1d] rounded-[0%_0%_50%_50%] z-1">
+                </div>
+            </motion.div>
         </main>
     )
 }

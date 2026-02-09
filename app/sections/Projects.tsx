@@ -52,26 +52,6 @@ export default function Projects() {
         index: 0,
     });
 
-    // useEffect(() => {
-    //     gsap.registerPlugin(ScrollTrigger);
-
-    //     if (!sectionRef.current) return;
-
-    //     const bgColor = sectionRef.current.dataset.bgColor;
-
-    //     const ctx = gsap.context(() => {
-
-    //         gsap.to("body", {
-    //             backgroundColor: bgColor,
-    //             scrollTrigger: {
-    //                 trigger: sectionRef.current,
-    //                 start: "bottom center",
-    //                 scrub: true
-    //             }
-    //         })
-    //     })
-    //     return () => ctx.revert();
-    // }, [])
 
     return (
         <main ref={sectionRef} data-bg-color="#1D1D1D" className="h-[100vh] mt-[2rem]">
