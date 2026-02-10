@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
 import gsap from "gsap";
@@ -17,9 +17,87 @@ export default function Footer() {
 
     const rotate = useTransform(scrollYProgress, [0, 1], [300, 90])
 
+    const linesRef = useRef<HTMLDivElement[]>([]);
+    const linksRef = useRef<HTMLAnchorElement[]>([]);
+
+    const addLineRef = (el: HTMLDivElement) => {
+        if (el && !linesRef.current.includes(el)) linesRef.current.push(el);
+    };
+
+    const addLinkRef = (el: HTMLAnchorElement) => {
+        if (el && !linksRef.current.includes(el)) linksRef.current.push(el);
+    };
+
+
+    const handleHover = (index: number) => {
+        // underline animation
+        gsap.to(linesRef.current[index], {
+            scaleX: 1,
+            transformOrigin: "left",
+            duration: 0.3,
+            ease: "power2.out",
+        });
+    };
+
+    const handleHoverOut = (index: number) => {
+        gsap.to(linesRef.current[index], {
+            scaleX: 0,
+            transformOrigin: "left",
+            duration: 0.3,
+            ease: "power2.out",
+        });
+
+        // reset magnetic position
+        gsap.to(linksRef.current[index], {
+            x: 0,
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out",
+        });
+    };
+
+    const handleMouseMove = (index: number, e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        const link = linksRef.current[index];
+        const rect = link.getBoundingClientRect();
+        const x = e.clientX - (rect.left + rect.width / 2);
+        const y = e.clientY - (rect.top + rect.height / 2);
+
+        gsap.to(link, {
+            x: x * 0.2,
+            y: y * 0.2,
+            duration: 0.3,
+            ease: "power2.out",
+        });
+    };
+
+    const socials = [
+        { name: "Facebook", link: "https://dennissnellenberg.com/contact" },
+        { name: "Instagram", link: "https://instagram.com" },
+        { name: "Github", link: "https://github.com" },
+        { name: "Linkedin", link: "https://linkedin.com" },
+    ];
+
+    const [localTime, setLocalTime] = useState(new Date());
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setLocalTime(new Date());
+        }, 1000); // update every second
+
+        return () => clearInterval(interval);
+    }, []);
+
+    // Format time as "hh:mm AM/PM GMT+offset"
+    const formattedTime = localTime.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+    });
+
+    const timezoneOffset = -localTime.getTimezoneOffset() / 60;
 
     return (
-        <motion.footer ref={container} style={{y}} className="bg-white flex flex-col z-[1] items-center justify-center relative">
+        <motion.footer ref={container} style={{ y }} className="bg-white flex flex-col z-[1] items-center justify-center relative">
 
             {/* motion.Footer Content */}
             <div className="pt-[150px] w-[100%] bg-white">
@@ -28,7 +106,7 @@ export default function Footer() {
                         <div className="flex items-center gap-4">
                             <div className="relative w-[100px] h-[100px] rounded-full overflow-hidden">
                                 <Image
-                                    src="/gighub.png"
+                                    src="/small-avatar.png"
                                     alt="profile pic"
                                     fill
                                     className="object-cover"
@@ -48,7 +126,7 @@ export default function Footer() {
                                 <div className="flex-grow bg-black/20"></div>
                             </div>
 
-                            <motion.div style={{x}} className="flex justify-end mr-16">
+                            <motion.div style={{ x }} className="flex justify-end mr-16">
                                 <button className="
                                     w-[160px] h-[160px]
                                     rounded-full
@@ -74,7 +152,9 @@ export default function Footer() {
                         </motion.svg>
 
                         <div className="flex flex-wrap gap-4">
-                            <button
+                            {/* Email */}
+                            <a
+                                href="mailto:info@gmail.com"
                                 className="
                                 px-8 py-4
                                 border border-black
@@ -83,12 +163,15 @@ export default function Footer() {
                                 text-sm font-medium
                                 transition-all duration-300
                                 hover:bg-black hover:text-white
+                                inline-block
                                 "
                             >
-                                info@gmail.com
-                            </button>
+                                Babida.cij.bscs@gmail.com
+                            </a>
 
-                            <button
+                            {/* Phone */}
+                            <a
+                                href="tel:+639892738495"
                                 className="
                                 px-8 py-4
                                 border border-black
@@ -97,10 +180,11 @@ export default function Footer() {
                                 text-sm font-medium
                                 transition-all duration-300
                                 hover:bg-black hover:text-white
+                                inline-block
                                 "
                             >
                                 +63 9892738495
-                            </button>
+                            </a>
                         </div>
 
                     </div>
@@ -113,25 +197,36 @@ export default function Footer() {
                             <p>2026 © Edition</p>
                         </span>
                         <span>
-                            <h3 className="text-gray-500 font-semibold">Time</h3>
-                            <p>11:49 PM GMT+2</p>
+                            <h3 className="text-gray-500 font-semibold">Local Time</h3>
+                            <p>
+                                {formattedTime} GMT{timezoneOffset >= 0 ? `+${timezoneOffset}` : timezoneOffset}
+                            </p>
                         </span>
                     </div>
                     <div>
                         <h3 className="text-gray-500 font-semibold">socials</h3>
-                        <div className="flex gap-5">
-                            <div>
-                                <a className="z-[100]" href="https://dennissnellenberg.com/contact">Facebook</a>
-                            </div>
-                            <div>
-                                <a>Instagram</a>
-                            </div>
-                            <div>
-                                <a>Github</a>
-                            </div>
-                            <div>
-                                <a>Linkedin</a>
-                            </div>
+                        <div className="flex gap-5 mt-2">
+                            {socials.map((social, index) => (
+                                <div key={social.name} className="relative">
+                                    <a
+                                        href={social.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        ref={addLinkRef}
+                                        className="relative cursor-pointer inline-block px-1"
+                                        onMouseEnter={() => handleHover(index)}
+                                        onMouseLeave={() => handleHoverOut(index)}
+                                        onMouseMove={(e) => handleMouseMove(index, e)}
+                                    >
+                                        {social.name}
+                                        {/* line under text */}
+                                        <div
+                                            ref={addLineRef}
+                                            className="absolute left-0 -bottom-1 w-full h-[2px] bg-black scale-x-0"
+                                        />
+                                    </a>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

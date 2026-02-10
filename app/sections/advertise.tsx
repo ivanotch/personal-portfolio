@@ -164,7 +164,7 @@ export default function Advertise() {
                         Driven by curiosity and purpose, I build solutions that connect technology and people.
                     </p>
                     <div ref={magneticButton} className="cursor-pointer p-5 h-30 w-30 mt-[1.6rem] bg-black rounded-full flex items-center justify-center">
-                        <span className="hover-bg absolute inset-0 bg-[#C1DDDF] rounded-full scale-0" />
+                        <span className="hover-bg absolute inset-0 bg-blue-600 rounded-full scale-0" />
                         <span className="relative z-10 text-white">About Me</span>
                     </div>
                 </div>

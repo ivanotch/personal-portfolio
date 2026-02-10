@@ -58,41 +58,53 @@ export default function Hero({ startAnimation }: HeroProps) {
         }
     }, [startAnimation]);
 
-    const handleIconHover = () => {
-        if (iconRef.current) {
-            gsap.fromTo(iconRef.current, { x: 0 }, { x: 10, duration: 0.2, yoyoEase: true, repeat: 5, ease: 'power3.inOut' });
-        }
-    }
+    const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        const el = e.currentTarget;
+        const rect = el.getBoundingClientRect();
+        const iconX = rect.left + rect.width / 2;
+        const iconY = rect.top + rect.height / 2;
+
+        const deltaX = (e.clientX - iconX) * 0.2; // intensity
+        const deltaY = (e.clientY - iconY) * 0.2;
+
+        gsap.to(el, { x: deltaX, y: deltaY, scale: 1.1, duration: 0.3, ease: "power3.out" });
+    };
+
+    const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        const el = e.currentTarget;
+        gsap.to(el, { x: 0, y: 0, scale: 1, duration: 0.5, ease: "power3.out" });
+    };
 
     return (
         <motion.div initial={{ opacity: 0, y: 50 }} animate={controls} className="h-[100vh] rounded-lg bg-[#C1DDDF]">
             <Nav />
 
             <div className="absolute top-[40%] left-[5%]">
-                <div className="flex flex-col gap-5" data-scroll data-scroll-speed="0.2" >
+                <div className="flex flex-col gap-5 cursor-pointer">
                     <a
-                        ref={iconRef}
-                        onMouseEnter={handleIconHover}
                         href="https://github.com/ivanotch"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:scale-110 cursor-pointer transition-transform"
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
                     >
                         <Github size={50} color="#1e1d1dff" />
                     </a>
                     <a
-                        href="https://instagram.com/"
+                        href="https://www.instagram.com/ivanoskiee/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:scale-110 transition-transform"
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
                     >
                         <Instagram size={50} color="#1e1d1dff" />
                     </a>
                     <a
-                        href="https://linkedin.com/in/"
+                        href="https://www.linkedin.com/in/charlz-ivan-john-babida-364b26257/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:scale-110 transition-transform"
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
                     >
                         <Linkedin size={50} color="#1e1d1dff" />
                     </a>
