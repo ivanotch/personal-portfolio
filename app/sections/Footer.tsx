@@ -12,15 +12,16 @@ export default function Footer() {
         target: container,
         offset: ["start end", "end end"]
     })
-    const x = useTransform(scrollYProgress, [0, 1], [0, 100])
+    const x = useTransform(scrollYProgress, [0, 1], [0, 50])
     const y = useTransform(scrollYProgress, [0, 1], [-500, 0])
-    const rotate = useTransform(scrollYProgress, [0, 1], [120, 90])
+
+    const rotate = useTransform(scrollYProgress, [0, 1], [300, 90])
 
 
     return (
-        <footer ref={container} className="bg-white flex flex-col items-center justify-center relative">
+        <motion.footer ref={container} style={{y}} className="bg-white flex flex-col z-[-100] items-center justify-center relative">
 
-            {/* Footer Content */}
+            {/* motion.Footer Content */}
             <div className="pt-[150px] w-[100%] bg-white">
                 <div className="w-[60%] mx-[auto]">
                     <div className="flex flex-col mb-[100px] relative">
@@ -47,7 +48,7 @@ export default function Footer() {
                                 <div className="flex-grow bg-black/20"></div>
                             </div>
 
-                            <div className="flex justify-end mr-16">
+                            <motion.div style={{x}} className="flex justify-end mr-16">
                                 <button className="
                                     w-[160px] h-[160px]
                                     rounded-full
@@ -63,7 +64,7 @@ export default function Footer() {
                                     ">
                                     Get in Touch
                                 </button>
-                            </div>
+                            </motion.div>
                         </div>
 
 
@@ -120,13 +121,13 @@ export default function Footer() {
                         <h3>socials</h3>
                         <div className="flex gap-5">
                             <div>
-                                <p>Awwwards</p>
+                                <p>Facebook</p>
                             </div>
                             <div>
                                 <p>Instagram</p>
                             </div>
                             <div>
-                                <p>Dribbble</p>
+                                <p>Github</p>
                             </div>
                             <div>
                                 <p>Linkedin</p>
@@ -135,6 +136,6 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-        </footer>
+        </motion.footer>
     );
 }

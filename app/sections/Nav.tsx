@@ -4,29 +4,29 @@ import { gsap } from "gsap";
 
 export default function Nav() {
     const slackRef = useRef<SVGSVGElement>(null);
-    let spinTween: gsap.core.Tween;
+    const spinTween = useRef<gsap.core.Tween | null>(null);
     const parentRef = useRef<HTMLDivElement>(null);
     const ivanotchRef = useRef<HTMLDivElement>(null);
     const realnameRef = useRef<HTMLDivElement>(null);
     const timeline = useRef<gsap.core.Timeline>(null);
 
     useEffect(() => {
-        if (slackRef.current) {
-            // Continuous spin
-            spinTween = gsap.to(slackRef.current, {
-                rotation: 360,
-                duration: 3,
-                repeat: -1,
-                ease: "linear",
-                transformOrigin: "50% 50%",
-            });
-        }
+        if (!slackRef.current) return;
+
+        spinTween.current = gsap.to(slackRef.current, {
+            rotation: 360,
+            duration: 3,
+            repeat: -1,
+            ease: "linear",
+            transformOrigin: "50% 50%",
+        });
 
         return () => {
-            // cleanup
-            spinTween?.kill();
+            spinTween.current?.kill();
+            spinTween.current = null;
         };
     }, []);
+
 
     useEffect(() => {
         gsap.set(realnameRef.current, { x: 50, opacity: 0 });
@@ -41,12 +41,11 @@ export default function Nav() {
 
     const handleMouseEnter = () => {
         timeline.current?.play();
-        spinTween.pause();
+        spinTween.current?.pause();
 
         if (slackRef.current) {
-            // Rotate backward while scaling
             gsap.to(slackRef.current, {
-                rotation: "-=360", // rotate -360 degrees from current position
+                rotation: "-=360",
                 scale: 1.3,
                 duration: 0.3,
                 ease: "power1.inOut",
@@ -56,18 +55,19 @@ export default function Nav() {
 
     const handleMouseLeave = () => {
         timeline.current?.reverse();
+
         if (slackRef.current) {
-            // Reset scale and resume continuous spin
             gsap.to(slackRef.current, {
                 scale: 1,
                 duration: 0.2,
                 ease: "power1.out",
                 onComplete: () => {
-                    spinTween.play();
+                    spinTween.current?.play();
                 },
             });
         }
     };
+
 
 
     return (

@@ -105,8 +105,9 @@ export default function Skills() {
 
 
     const bodyRef = useRef<HTMLElement>(null);
+    const skillsRef = useRef<HTMLDivElement>(null);
 
-    const {scrollYProgress} = useScroll({
+    const { scrollYProgress } = useScroll({
         target: bodyRef,
         offset: ["start end", "end start"]
     })
@@ -116,33 +117,88 @@ export default function Skills() {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        if (!bodyRef.current) return;
+        if (!bodyRef.current || !skillsRef.current) return;
 
-        const bgColor = bodyRef.current.dataset.bgColor;
+        const bgColor = bodyRef.current.dataset.bgColor ?? "#1D1D1D";
 
         const ctx = gsap.context(() => {
+            const tl = gsap.timeline({
+                paused: true,
+            });
+
+            tl.to("body", {
+                backgroundColor: bgColor,
+                duration: 0.6,
+                ease: "power2.out",
+            }, 0)
+                .to(skillsRef.current, {
+                    backgroundColor: bgColor,
+                    duration: 0.6,
+                    ease: "power2.out",
+                }, 0);
+
             ScrollTrigger.create({
                 trigger: bodyRef.current,
                 start: "top center",
-                onEnter: () => {
-                    gsap.to("body", {
-                        backgroundColor: bgColor,
-                        duration: 0.6,
-                        ease: "power2.out",
-                    });
-                },
-                onLeaveBack: () => {
-                    gsap.to("body", {
-                        backgroundColor: "#ffffff", // or whatever your default is
-                        duration: 0.9,
-                        ease: "power2.out",
-                    });
-                },
+                onEnter: () => tl.play(),
+                onEnterBack: () => tl.play(),
+                // onLeave: () => tl.reverse(),
+                onLeaveBack: () => tl.reverse(),
             });
         });
 
         return () => ctx.revert();
     }, []);
+
+    const heroRef = useRef<HTMLDivElement>(null);
+
+    const titleRef = useRef<HTMLHeadingElement>(null);
+
+    useEffect(() => {
+        if (!heroRef.current || !titleRef.current) return;
+
+        const words = titleRef.current.querySelectorAll("span");
+
+        const ctx = gsap.context(() => {
+            gsap.set(words, {
+                opacity: 1,
+                y: 0,
+            });
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: heroRef.current,
+                    start: "top top",
+                    end: "+=120%",
+                    pin: true,
+                    scrub: 0.8,
+                    anticipatePin: 1,
+                },
+            });
+
+            // ENTRY
+            tl.from(words, {
+                y: 120,
+                opacity: 0,
+                scale: 0.98,
+                stagger: 0.08,
+                ease: "power3.out",
+            });
+
+            // HOLD → TRANSFORM
+            tl.to(words, {
+                letterSpacing: "0.15em",
+                scale: 0.92,
+                opacity: 0.85,
+                duration: 1,
+                ease: "power2.out",
+            }, "+=0.3");
+
+        });
+
+        return () => ctx.revert();
+    }, []);
+
 
 
     return (
@@ -150,13 +206,21 @@ export default function Skills() {
             ref={bodyRef}
             className="relative"
             data-bg-color="#1D1D1D"
-            
+
         >
-            <div className="h-screen flex mb-[1rem] items-center justify-center">
-                <h1 className=" text-white text-9xl tracking-tight font-semibold font-inter leading-none">What Do I Do?</h1>
+            <div ref={heroRef} className="h-screen flex mb-[1rem] items-center justify-center">
+                <h1
+                    ref={titleRef}
+                    className="text-white text-9xl tracking-tight font-semibold font-inter leading-none"
+                >
+                    <span className="inline-block mr-6">What</span>
+                    <span className="inline-block mr-6">Do</span>
+                    <span className="inline-block">I</span>
+                    <span className="inline-block ml-6">Do?</span>
+                </h1>
             </div>
 
-            <div className="relative mb-[1rem]">
+            <div ref={skillsRef} data-bg-color="#1D1D1D" className="relative pb-[1rem]">
 
                 <div
                     className="
@@ -204,7 +268,7 @@ export default function Skills() {
                 </div>
             </div>
 
-            <motion.div style={{height}} className="relative  ">
+            <motion.div style={{ height }} className="relative  ">
                 <div className="shadow-[0px_60px_50px_rgba(0,0,0,0.248)] absolute h-[1550%] w-[110%] left-[-10%] bg-[#1d1d1d] rounded-[0%_0%_50%_50%] z-1">
                 </div>
             </motion.div>
