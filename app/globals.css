@@ -12,9 +12,23 @@
   }
 }
 
+html, body {
+  overflow-y: scroll; /* scrolling is enabled */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Chrome, Edge, Safari */
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* optional: remove scrollbar background */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   cursor: wait;
 }
+
+
 

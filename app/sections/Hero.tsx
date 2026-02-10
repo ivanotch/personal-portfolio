@@ -4,19 +4,38 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Nav from "./Nav";
 import { Github, Instagram, Slack, Linkedin } from "@deemlol/next-icons";
+import { motion, useAnimation } from 'framer-motion';
 
-export default function Hero() {
+type HeroProps = {
+    startAnimation: boolean;
+};
+
+export default function Hero({ startAnimation }: HeroProps) {
     const nameRef = useRef<HTMLDivElement>(null);
     const lineRef = useRef<HTMLDivElement>(null);
     const tagRef = useRef<HTMLDivElement>(null);
     const iconRef = useRef<HTMLAnchorElement>(null);
 
+    const controls = useAnimation();
+
     useEffect(() => {
+        if (startAnimation) {
+            controls.start({
+                opacity: 1,
+                y: 0,
+                transition: { duration: 1 },
+            });
+        }
+    }, [startAnimation]);
+
+    useEffect(() => {
+        if (!startAnimation) return;
+
         if (nameRef.current) {
             gsap.to(nameRef.current, {
                 opacity: 1,
                 y: 0,
-                duration: 2,
+                duration: 3.5,
                 ease: "power1.inOut"
             });
         }
@@ -25,7 +44,7 @@ export default function Hero() {
             gsap.to(tagRef.current, {
                 opacity: 1,
                 y: 0,
-                duration: 2,
+                duration: 3.5,
                 ease: "power1.inOut"
             });
         }
@@ -34,19 +53,19 @@ export default function Hero() {
             gsap.fromTo(
                 lineRef.current,
                 { scaleX: 0, transformOrigin: "center" },
-                { scaleX: 1, duration: 1.5, ease: "power2.out" }
+                { scaleX: 1, duration: 3, ease: "power2.out" }
             );
         }
-    }, []);
+    }, [startAnimation]);
 
     const handleIconHover = () => {
         if (iconRef.current) {
-            gsap.fromTo(iconRef.current, {x: 0}, {x: 10, duration: 0.2, yoyoEase: true, repeat: 5, ease: 'power3.inOut'});
+            gsap.fromTo(iconRef.current, { x: 0 }, { x: 10, duration: 0.2, yoyoEase: true, repeat: 5, ease: 'power3.inOut' });
         }
     }
 
     return (
-        <div className="h-[100vh] rounded-lg bg-[#C1DDDF]">
+        <motion.div initial={{ opacity: 0, y: 50 }} animate={controls} className="h-[100vh] rounded-lg bg-[#C1DDDF]">
             <Nav />
 
             <div className="absolute top-[40%] left-[5%]">
@@ -104,6 +123,6 @@ export default function Hero() {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }

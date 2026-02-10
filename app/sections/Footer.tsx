@@ -19,7 +19,7 @@ export default function Footer() {
 
 
     return (
-        <motion.footer ref={container} style={{y}} className="bg-white flex flex-col z-[-100] items-center justify-center relative">
+        <motion.footer ref={container} style={{y}} className="bg-white flex flex-col z-[1] items-center justify-center relative">
 
             {/* motion.Footer Content */}
             <div className="pt-[150px] w-[100%] bg-white">
@@ -109,28 +109,28 @@ export default function Footer() {
                 <div className="flex justify-between m-[3rem]">
                     <div className="flex gap-5">
                         <span>
-                            <h3>Version</h3>
-                            <p>2022 © Edition</p>
+                            <h3 className="text-gray-500 font-semibold">Version</h3>
+                            <p>2026 © Edition</p>
                         </span>
                         <span>
-                            <h3>Version</h3>
+                            <h3 className="text-gray-500 font-semibold">Time</h3>
                             <p>11:49 PM GMT+2</p>
                         </span>
                     </div>
                     <div>
-                        <h3>socials</h3>
+                        <h3 className="text-gray-500 font-semibold">socials</h3>
                         <div className="flex gap-5">
                             <div>
-                                <p>Facebook</p>
+                                <a className="z-[100]" href="https://dennissnellenberg.com/contact">Facebook</a>
                             </div>
                             <div>
-                                <p>Instagram</p>
+                                <a>Instagram</a>
                             </div>
                             <div>
-                                <p>Github</p>
+                                <a>Github</a>
                             </div>
                             <div>
-                                <p>Linkedin</p>
+                                <a>Linkedin</a>
                             </div>
                         </div>
                     </div>

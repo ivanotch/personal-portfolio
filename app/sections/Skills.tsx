@@ -220,7 +220,7 @@ export default function Skills() {
                 </h1>
             </div>
 
-            <div ref={skillsRef} data-bg-color="#1D1D1D" className="relative pb-[1rem]">
+            <div ref={skillsRef} data-bg-color="#1D1D1D" className="relative pb-[1rem] z-[10]">
 
                 <div
                     className="
@@ -269,7 +269,7 @@ export default function Skills() {
             </div>
 
             <motion.div style={{ height }} className="relative  ">
-                <div className="shadow-[0px_60px_50px_rgba(0,0,0,0.248)] absolute h-[1550%] w-[110%] left-[-10%] bg-[#1d1d1d] rounded-[0%_0%_50%_50%] z-1">
+                <div className="shadow-[0px_60px_50px_rgba(0,0,0,0.248)] absolute h-[1550%] w-[110%] left-[-10%] bg-[#1d1d1d] rounded-[0%_0%_50%_50%] z-[10]">
                 </div>
             </motion.div>
         </main>
