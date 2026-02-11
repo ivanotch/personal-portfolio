@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import PageTransition from "@/components/PagePreloader";
 import LandingAbout from "./LandingAbout";
+import CertificateShowcase from "./CertificateShowcase";
 
 
 export default function AboutMe() {
@@ -54,7 +55,10 @@ export default function AboutMe() {
             {showLoader && <PageTransition key="preloader" title="About Me" />}
 
             {!showLoader && (
-                <LandingAbout />
+                <>
+                    <LandingAbout />
+                    <CertificateShowcase />
+                </>
             )}
         </AnimatePresence>
     );

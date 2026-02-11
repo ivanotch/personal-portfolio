@@ -109,11 +109,6 @@ export default function LandingAbout() {
                         </div>
                     </div>
                 </div>
-
-                {/* this should cover the image */}
-                <div className="h-[100vh] relative z-[100]">
-
-                </div>
             </div>
         </motion.main>
     );
