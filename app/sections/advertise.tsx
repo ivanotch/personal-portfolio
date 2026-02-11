@@ -156,7 +156,7 @@ export default function Advertise() {
         >
             <div className="flex w-[65%] mx-[auto] mt-[11rem]">
                 <h4 className="pr-[2rem]">
-                    <span ref={firstSentence} className="fsentence text-[2rem]">I made 4 case study projects that was implemented and solved real world problem. I create better websites and systems that are well structured, functional, and efficient.</span>
+                    <span ref={firstSentence} className="fsentence text-[2rem]">I value clean code, feedback, and collaboration. I'm comfortable asking questions, learning from code reviews, and improving fast in team environments.</span>
                 </h4>
 
                 <div className="pl-[2rem] w-[100%] p-2">

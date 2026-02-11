@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import Nav from "./Nav";
 import { Github, Instagram, Slack, Linkedin } from "@deemlol/next-icons";
 import { motion, useAnimation } from 'framer-motion';
+import MagneticLink from "@/components/MagneticLink";
 
 type HeroProps = {
     startAnimation: boolean;

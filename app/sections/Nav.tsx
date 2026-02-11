@@ -1,6 +1,9 @@
+'use client'
 import React, { useEffect, useRef } from "react";
 import { ArrowUpRight, Slack } from "@deemlol/next-icons";
 import { gsap } from "gsap";
+import { useRouter } from "next/navigation";
+import MagneticLink from "@/components/MagneticLink";
 
 export default function Nav() {
     const slackRef = useRef<SVGSVGElement>(null);
@@ -9,6 +12,8 @@ export default function Nav() {
     const ivanotchRef = useRef<HTMLDivElement>(null);
     const realnameRef = useRef<HTMLDivElement>(null);
     const timeline = useRef<gsap.core.Timeline>(null);
+
+    const router = useRouter();
 
     useEffect(() => {
         if (!slackRef.current) return;
@@ -68,6 +73,8 @@ export default function Nav() {
         }
     };
 
+    
+
 
 
     return (
@@ -91,9 +98,11 @@ export default function Nav() {
 
             <div className="bg-white/20 backdrop-blur-xl px-2 py-1 w-[15rem] rounded-xl flex justify-center">
                 <ul className="flex gap-[1rem]">
-                    <li>About Me</li>
+                    <li>
+                        <MagneticLink href="/about">About Me</MagneticLink>
+                    </li>
                     <li>:</li>
-                    <li>Projects</li>
+                    <li><MagneticLink href="/projects">Projects</MagneticLink></li>
                 </ul>
             </div>
 
