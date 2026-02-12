@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import SplitText from "gsap/SplitText";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useRouter } from "next/navigation";
 
 
 export default function Advertise() {
@@ -9,6 +10,8 @@ export default function Advertise() {
     const firstSentence = useRef<HTMLSpanElement>(null);
     const littleText = useRef<HTMLParagraphElement>(null);
     const magneticButton = useRef<HTMLDivElement>(null);
+
+    const router = useRouter();
 
     //use effect animation for the texts
     useEffect(() => {
@@ -163,7 +166,7 @@ export default function Advertise() {
                     <p ref={littleText} className="text-[1.2em]">
                         Driven by curiosity and purpose, I build solutions that connect technology and people.
                     </p>
-                    <div ref={magneticButton} className="cursor-pointer p-5 h-30 w-30 mt-[1.6rem] bg-black rounded-full flex items-center justify-center">
+                    <div onClick={() => router.push('/about')} ref={magneticButton} className="cursor-pointer p-5 h-30 w-30 mt-[1.6rem] bg-black rounded-full flex items-center justify-center">
                         <span className="hover-bg absolute inset-0 bg-blue-600 rounded-full scale-0" />
                         <span className="relative z-10 text-white">About Me</span>
                     </div>

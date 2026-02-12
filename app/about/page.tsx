@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import PageTransition from "@/components/PagePreloader";
 import LandingAbout from "./LandingAbout";
 import CertificateShowcase from "./CertificateShowcase";
+import Footer from "../sections/Footer";
 
 
 export default function AboutMe() {
@@ -55,10 +56,11 @@ export default function AboutMe() {
             {showLoader && <PageTransition key="preloader" title="About Me" />}
 
             {!showLoader && (
-                <>
+                <div id="about-page">
                     <LandingAbout />
                     <CertificateShowcase />
-                </>
+                    <Footer />
+                </div>
             )}
         </AnimatePresence>
     );

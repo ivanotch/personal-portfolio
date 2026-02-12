@@ -81,6 +81,7 @@ export default function Nav() {
         <header className="flex p-[2rem] justify-between items-center">
             <div
                 ref={parentRef}
+                onClick={() => router.push('/')}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 className="ml-[30px] text-[1.1rem] flex gap-2 items-center font-poppins font-[600]"

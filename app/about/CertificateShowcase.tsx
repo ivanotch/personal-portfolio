@@ -1,4 +1,21 @@
+"use client";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { useSpring } from "framer-motion";
+import Specialty from "./Specialty"
+
 export default function CertificateShowcase() {
+
+    const containerRef = useRef<HTMLElement>(null);
+
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"],
+    });
+
+    const yFast = useTransform(scrollYProgress, [0, 1], [0, 100]);
+    const smoothFast = useSpring(yFast, { stiffness: 200, damping: 80 });
 
     const certs = [
         {
@@ -9,12 +26,12 @@ export default function CertificateShowcase() {
         {
             name: "Introduction to Cloud Computing",
             src: "/certificate/intro-cloud.jpg",
-            bg: "bg-[#e3e3e3]" 
+            bg: "bg-[#e3e3e3]"
         },
         {
             name: "Front-End With React",
             src: "/certificate/react.png",
-            bg: "bg-[#d4e3e6]" 
+            bg: "bg-[#d4e3e6]"
         },
         {
             name: "Web Development with HTML, CSS, Javascript",
@@ -24,12 +41,12 @@ export default function CertificateShowcase() {
         {
             name: "2022 Web Development Bootcamp",
             src: "/certificate/udemy.jpg",
-            bg: "bg-[#d7d4cf]" 
+            bg: "bg-[#d7d4cf]"
         },
     ]
 
     return (
-        <main className="relative">
+        <main ref={containerRef} className="relative">
             <div className="absolute left-[9%] top-[4%]">
                 <p className="text-[12em] tracking-widest font-semibold text-gray-300 font-inter">Certificates</p>
             </div>
@@ -49,22 +66,24 @@ export default function CertificateShowcase() {
                     {/* Top row: 3 cards */}
                     <div className="flex justify-center gap-5">
                         {certs.slice(0, 3).map((cert, index) => (
-                            <div key={index} className={`flex flex-col items-center p-4 ${cert.bg} shadow-lg w-70`}>
+                            <motion.div style={{ y: smoothFast }} key={index} className={`flex flex-col items-center p-4 ${cert.bg} shadow-xl w-70`}>
                                 <img src={cert.src} alt={cert.name} className="w-full h-40 object-cover rounded-xl mb-4" />
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
 
                     {/* Bottom row: 2 cards */}
                     <div className="flex justify-center gap-5">
                         {certs.slice(3, 5).map((cert, index) => (
-                            <div key={index} className={`flex flex-col items-center p-4 ${cert.bg} shadow-lg w-70`}>
+                            <motion.div style={{y: smoothFast}} key={index} className={`flex flex-col items-center p-4 ${cert.bg} shadow-xl w-70`}>
                                 <img src={cert.src} alt={cert.name} className="w-full h-40 object-cover rounded-xl mb-4" />
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
             </div>
+
+            <Specialty />
         </main>
     )
 }
