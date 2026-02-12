@@ -3,10 +3,12 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
 import gsap from "gsap";
 import { useScroll, motion, useTransform, useSpring } from 'framer-motion';
+import { useRouter } from "next/navigation";
 
 export default function Footer() {
 
     const container = useRef<HTMLElement>(null);
+    const router = useRouter();
 
     const { scrollYProgress } = useScroll({
         target: container,
@@ -139,7 +141,9 @@ export default function Footer() {
                                     hover:scale-105 hover:bg-blue-700
                                     active:scale-95
                                     relative z-10
-                                    ">
+                                    "
+                                        onClick={() => router.push('/contact')}
+                                    >
                                     Get in Touch
                                 </button>
                             </motion.div>
