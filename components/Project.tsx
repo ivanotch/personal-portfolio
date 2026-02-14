@@ -19,7 +19,7 @@ export default function Project({
     setModal,
 }: ProjectProps) {
     return (
-        <main className="group flex items-center justify-between py-[3rem] px-[4rem] border-t-[0.5px] hover:opacity-[0.4]" onMouseEnter={() => {
+        <main className="group flex items-center justify-between py-[2rem] px-[4rem] border-t-[0.5px] hover:opacity-[0.4]" onMouseEnter={() => {
             setModal({active: true, index: index})
         }}
         onMouseLeave={() => {

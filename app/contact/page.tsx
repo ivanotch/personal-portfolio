@@ -183,16 +183,16 @@ export default function Contact() {
                                         Send Message
                                     </button>
                                 </form>
-                        </motion.div>
+                            </motion.div>
+
+                        </div>
 
                     </div>
 
-                </div>
-
 
                 </main>
-    )
-}
+            )
+            }
         </AnimatePresence >
     )
 }

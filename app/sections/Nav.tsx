@@ -141,7 +141,7 @@ export default function Nav() {
             </div>
 
             <div className={`${pathname === '/contact' ? 'bg-white/90' : 'bg-white/20'} backdrop-blur-xl px-2 py-1 w-[15rem] rounded-xl flex justify-center`}>
-                <ul className="flex gap-[1rem]">
+                <ul className="flex gap-[1rem] font-[inter]">
                     <li>
                         <MagneticLink href="/about">About Me</MagneticLink>
                     </li>
