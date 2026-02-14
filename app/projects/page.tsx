@@ -5,6 +5,7 @@ import Nav from "../sections/Nav";
 import { AnimatePresence, motion } from "framer-motion";
 import PageTransition from "@/components/PagePreloader";
 import DisplayCards from "./DisplayCards";
+import Footer from "../sections/Footer";
 
 
 export default function Projects() {
@@ -59,6 +60,7 @@ export default function Projects() {
                     <Nav />
                     
                     <DisplayCards />
+                    <Footer />
                 </main>
             )
             }

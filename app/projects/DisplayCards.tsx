@@ -6,8 +6,10 @@ import { gsap } from "gsap";
 import { CiBoxList } from "react-icons/ci";
 import { LuLayoutGrid } from "react-icons/lu";
 import { projects } from '@/data/projects';
-import Project from "@/components/Project";
+import ProjectBox from "@/components/ProjectBox";
 import FloatingModal from "@/components/FloatingModal";
+import Project from "@/components/Project";
+import { useScroll, useTransform, motion } from "framer-motion";
 
 
 type ModalState = {
@@ -49,17 +51,40 @@ export default function DisplayCards() {
     };
 
     const [modal, setModal] = useState<ModalState>({
-            active: false,
-            index: 0,
-        });
+        active: false,
+        index: 0,
+    });
+
+    const filteredProjects = projects.filter((project) => {
+        if (filter === "All") return true;
+
+        if (filter === "Design") {
+            return project.task.includes("Design");
+        }
+
+        if (filter === "Development") {
+            return project.task.includes("Development");
+        }
+
+        return true;
+    });
+
+    const specialtyRef = useRef<HTMLElement>(null)
+
+    const { scrollYProgress } = useScroll({
+        target: specialtyRef,
+        offset: ["start end", "end start"]
+    })
+
+    const height = useTransform(scrollYProgress, [0, 0.95], [50, 0]);
 
     return (
-        <main className="overflow-y-hidden">
-            <div className="font-[inter] text-[4rem] mx-[auto] w-[60%] mt-[7rem] font-semibold">
+        <main ref={specialtyRef} className="relative bg-white  z-[100]">
+            <div className="font-[inter] text-[4rem] mx-[auto] w-[60%] mt-[6rem] font-semibold">
                 Building thoughtful digital experiences
             </div>
 
-            <div className="flex items-center w-[80%] mx-[auto] justify-between mt-[2.8rem]">
+            <div className=" flex items-center w-[80%] mx-[auto] justify-between mt-[3rem]">
                 <div className="flex gap-4">
                     {categories.map((item, index) => (
                         <div
@@ -70,11 +95,16 @@ export default function DisplayCards() {
                                 console.log(filter)
                             }}
                             onMouseLeave={handleMagneticLeave}
-                            className="relative cursor-pointer overflow-hidden px-8 py-4 border border-black rounded-full text-black group"
-                        >
+                            className={`relative cursor-pointer overflow-hidden px-8 py-4 border rounded-full group transition-all duration-300
+                                 ${filter === item
+                                    ? "bg-[#1d1d1d] text-white border-[#1d1d1d]"
+                                    : "border-black text-black"
+                                }
+                            `}                        >
                             {/* Blue Fill Background */}
-                            <span className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
-
+                            {filter !== item && (
+                                <span className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
+                            )}
                             {/* Text */}
                             <span className="relative z-10 transition-colors duration-500 group-hover:text-white">
                                 {item}
@@ -86,8 +116,19 @@ export default function DisplayCards() {
                 <div className="flex gap-5 py-2">
                     <div
                         onMouseMove={handleMagneticMove}
-                        onMouseLeave={handleMagneticLeave} className="relative cursor-pointer overflow-hidden p-5 border border-black rounded-full text-black group">
-                        <span className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
+                        onClick={() => setLayout("list")}
+                        onMouseLeave={handleMagneticLeave}
+                        className={`relative cursor-pointer overflow-hidden p-5 border rounded-full group transition-all duration-300
+                            ${layout === "list"
+                                ? "bg-[#1d1d1d] text-white border-[#1d1d1d]"
+                                : "border-black text-black"
+                            }
+                        `}
+                    >
+
+                        {layout !== "list" && (
+                            <span className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
+                        )}
 
                         <div className="text-[1.5em] relative z-10 transition-colors duration-500 group-hover:text-white">
                             <CiBoxList />
@@ -96,8 +137,18 @@ export default function DisplayCards() {
 
                     <div
                         onMouseMove={handleMagneticMove}
-                        onMouseLeave={handleMagneticLeave} className="relative cursor-pointer overflow-hidden p-5 border border-black rounded-full text-black group">
-                        <span className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
+                        onClick={() => setLayout("grid")}
+                        onMouseLeave={handleMagneticLeave}
+                        className={`relative cursor-pointer overflow-hidden p-5 border rounded-full group transition-all duration-300
+                            ${layout === "grid"
+                                ? "bg-[#1d1d1d] text-white border-[#1d1d1d]"
+                                : "border-black text-black"
+                            }
+                        `}
+                    >
+                        {layout !== "grid" && (
+                            <span className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]" />
+                        )}
 
                         <div className="text-[1.5em] relative z-10 transition-colors duration-500 group-hover:text-white">
                             <LuLayoutGrid />
@@ -106,14 +157,39 @@ export default function DisplayCards() {
                 </div>
             </div>
 
-            <div className="my-[2rem]">
-                <div className=" mx-[auto] w-[80%]">
-                    {projects.map((project, index) => {
-                        return <Project key={index} index={index} title={project.title} task={project.task} year={project.year} setModal={setModal} />
-                    })}
+            {
+                layout === "list" ? (
+                    <div className="my-[2rem]">
+                        <div className=" mx-[auto] w-[80%]">
+                            {filteredProjects.map((project, index) => {
+                                return <Project key={index} index={index} title={project.title} task={project.task} year={project.year} setModal={setModal} />
+                            })}
+                        </div>
+                        <FloatingModal modal={modal} projects={projects} />
+                    </div>
+                ) : (
+                    <div className="mx-auto mt-[3rem] mb-[4rem] w-[80%] grid grid-cols-1 md:grid-cols-2 gap-10">
+                        {filteredProjects.map((project, index) => (
+                            <ProjectBox
+                                key={project.id}
+                                index={index}
+                                id={project.id}
+                                title={project.title}
+                                task={project.task}
+                                year={project.year}
+                                src={project.src}
+                                color={project.color}
+                            />
+                        ))}
+                    </div>
+                )
+            }
+
+            <motion.div style={{ height }} className="relative  ">
+                <div className="shadow-[0px_60px_50px_rgba(0,0,0,0.248)] absolute h-[1550%] w-[110%] left-[-10%] bg-white rounded-[0%_0%_50%_50%] z-[10]">
                 </div>
-                <FloatingModal modal={modal} projects={projects} />
-            </div>
+            </motion.div>
+
         </main>
     )
 }
