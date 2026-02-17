@@ -2,7 +2,7 @@
 
 export  const projects = [
     {
-        id: 1,
+        id: "rescue-link",
         title: "Rescue Link Mobile",
         src: "/gighub.png",
         color: "#000000",
@@ -10,9 +10,11 @@ export  const projects = [
         year: "2025",
         featurePic: "",
         advertisementPic: "/gighub.png",
+        about: "A mobile app that connects people to nearby shelter and relief",
+        type: "Individual"
     },
     {
-        id: 2,
+        id: "Prowood",
         title: "Prowood",
         src: "/gighub.png",
         color: "#8C8C8C",
@@ -20,9 +22,11 @@ export  const projects = [
         year: "2024",
         featurePic: "/gighub.png",
         advertisementPic: "/gighub.png",
+        about: "An E-commerce website for Wood Panels and Floorings",
+        type: "Individual"
     },
     {
-        id: 3,
+        id: "comsa",
         title: "Comsa-now",
         src: "/gighub.png",
         color: "#EFE8D3",
@@ -30,9 +34,11 @@ export  const projects = [
         year: "2025",
         featurePic: "/gighub.png",
         advertisementPic: "/gighub.png",
+        about: "A social media for EARIST Computer Science Association",
+        type: "team"
     },
     {
-        id: 4,
+        id: "gighub",
         title: "Gighub",
         src: "/gighub.png",
         color: "#706D63",
@@ -40,5 +46,7 @@ export  const projects = [
         year: "2025",
         featurePic: "/gighub.png",
         advertisementPic: "/gighub.png",
+        about: "An App that connects nearby gig worker to SMEs looking for someone to to short fulfillment task",
+        type: "Individual"
     },
 ]
