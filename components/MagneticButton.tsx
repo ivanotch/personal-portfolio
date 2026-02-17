@@ -1,11 +1,12 @@
 "use client"
 import { useRef, useEffect } from 'react';
 import { gsap } from "gsap";
+import Link from 'next/link';
 
 
-export default function MagneticButton({text}: {text: string}) {
+export default function MagneticButton({text, link}: {text: string, link: string }) {
 
-    const magneticButton = useRef<HTMLDivElement>(null);
+    const magneticButton = useRef<HTMLAnchorElement>(null);
 
     useEffect(() => {
 
@@ -72,9 +73,9 @@ export default function MagneticButton({text}: {text: string}) {
         };
     }, [])
     return (
-        <div ref={magneticButton} className="cursor-pointer p-5 h-30 w-30 mt-[1.6rem] bg-black rounded-full flex items-center justify-center">
+        <Link href={link} ref={magneticButton} className="cursor-pointer p-5 h-30 w-30 mt-[1.6rem] bg-black rounded-full flex items-center justify-center">
             <span className="hover-bg absolute inset-0 bg-blue-600 rounded-full scale-0" />
             <span className="relative z-10 text-white text-center">{text}</span>
-        </div>
+        </Link>
     )
 }

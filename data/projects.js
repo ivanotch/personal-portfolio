@@ -10,8 +10,10 @@ export  const projects = [
         year: "2025",
         featurePic: "",
         advertisementPic: "/gighub.png",
+        featureText: "Seamlessly connect to rescuers",
         about: "A mobile app that connects people to nearby shelter and relief",
-        type: "Individual"
+        type: "Individual",
+        link: "https://github.com/ivanotch/rescueLink"
     },
     {
         id: "Prowood",
@@ -22,8 +24,10 @@ export  const projects = [
         year: "2024",
         featurePic: "/gighub.png",
         advertisementPic: "/gighub.png",
+        featureText: "Premium wood panels, delivered with precision.",
         about: "An E-commerce website for Wood Panels and Floorings",
-        type: "Individual"
+        type: "Individual",
+        link: "https://github.com/ivanotch/prowood",
     },
     {
         id: "comsa",
@@ -34,8 +38,10 @@ export  const projects = [
         year: "2025",
         featurePic: "/gighub.png",
         advertisementPic: "/gighub.png",
+        featureText: "Strengthening the digital voice of Comsa.",
         about: "A social media for EARIST Computer Science Association",
-        type: "team"
+        type: "team",
+        link: "https://github.com/ivanotch/COMSA-NOW"
     },
     {
         id: "gighub",
@@ -46,7 +52,9 @@ export  const projects = [
         year: "2025",
         featurePic: "/gighub.png",
         advertisementPic: "/gighub.png",
+        featureText: "Connecting nearby gig workers with SMEs for a reliable task fulfillment.",
         about: "An App that connects nearby gig worker to SMEs looking for someone to to short fulfillment task",
-        type: "Individual"
+        type: "Individual",
+        link: "https://github.com/ivanotch/gighub"
     },
 ]
