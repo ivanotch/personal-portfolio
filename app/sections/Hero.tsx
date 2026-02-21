@@ -6,6 +6,9 @@ import Nav from "./Nav";
 import { Github, Instagram, Slack, Linkedin } from "@deemlol/next-icons";
 import { motion, useAnimation } from 'framer-motion';
 import MagneticLink from "@/components/MagneticLink";
+import Image from "next/image";
+import { useScroll, useTransform } from 'framer-motion';
+
 
 type HeroProps = {
     startAnimation: boolean;
@@ -77,7 +80,7 @@ export default function Hero({ startAnimation }: HeroProps) {
     };
 
     return (
-        <motion.div initial={{ opacity: 0, y: 50 }} animate={controls} className="h-[100vh] rounded-lg bg-[#C1DDDF]">
+        <motion.div initial={{ opacity: 0, y: 50 }} animate={controls} className="h-[100vh] relative rounded-lg bg-[#C1DDDF]">
             <Nav />
 
             <div className="absolute top-[40%] left-[5%]">
@@ -115,6 +118,33 @@ export default function Hero({ startAnimation }: HeroProps) {
             <div className="absolute top-[62%] right-[5%]" data-scroll data-scroll-speed="0.2">
                 <div className="rotate-90 origin-top-right">
                     <p className="tracking-widest font-[500]">Babida.cij.bscs@gmail.com</p>
+                </div>
+            </div>
+
+            <div
+                className="absolute left-[14%] top-[20%] w-[60%] h-[70%] rounded-lg"
+                data-scroll
+                data-scroll-speed='0.2'
+                style={{
+                    transform: "translateY(-10px) scale(1.02)",
+                }}
+            >
+                {/* Shadow wrapper */}
+                <div
+                    className="w-full h-full rounded-lg"
+                    style={{
+                        filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.5))",
+                    }}
+                >
+                    <Image
+                        alt="hero pic"
+                        src="/hero-picv2.png"
+                        fill
+                        className="object-cover rounded-lg"
+                        style={{
+                            clipPath: "polygon(0 0, 100% 0, 100% 20%, 60% 20%, 60% 60%, 100% 60%, 100% 100%, 0 100%)",
+                        }}
+                    />
                 </div>
             </div>
 

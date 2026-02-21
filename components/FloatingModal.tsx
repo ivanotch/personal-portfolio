@@ -94,12 +94,11 @@ export default function FloatingModal({
                     {
                         projects.map((project, index) => {
                             const { src, color } = project;
-                            console.log(src)
                             return <div style={{ backgroundColor: color }} key={`modal_${index}`} className="relative h-[100%] flex items-center justify-center">
                                 <Image
                                     className="h-[auto]"
                                     alt="project_image"
-                                    src="/gighub.png"
+                                    src={src}
                                     width={300}
                                     height={100}
                                 />

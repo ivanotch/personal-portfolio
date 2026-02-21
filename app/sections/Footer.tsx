@@ -73,10 +73,10 @@ export default function Footer() {
     };
 
     const socials = [
-        { name: "Facebook", link: "https://dennissnellenberg.com/contact" },
-        { name: "Instagram", link: "https://instagram.com" },
-        { name: "Github", link: "https://github.com" },
-        { name: "Linkedin", link: "https://linkedin.com" },
+        { name: "Facebook", link: "https://www.facebook.com/ivan.babida" },
+        { name: "Instagram", link: "https://www.instagram.com/ivanoskiee/" },
+        { name: "Github", link: "https://github.com/ivanotch" },
+        { name: "Linkedin", link: "https://www.linkedin.com/in/charlz-ivan-john-babida-364b26257/" },
     ];
 
     const [localTime, setLocalTime] = useState(new Date());

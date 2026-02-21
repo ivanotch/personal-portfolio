@@ -162,7 +162,7 @@ export default function DisplayCards() {
                     <div className="my-[2rem]">
                         <div className=" mx-[auto] w-[80%]">
                             {filteredProjects.map((project, index) => {
-                                return <Project key={index} id={project.id} index={index} title={project.title} task={project.task} year={project.year} setModal={setModal} />
+                                return <Project key={index} id={project.id} index={index} advertisementPic={project.advertisementPic} featurePic={project.featurePic} src={project.src} title={project.title} task={project.task} year={project.year} setModal={setModal} />
                             })}
                         </div>
                         <FloatingModal modal={modal} projects={projects} />

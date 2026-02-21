@@ -119,15 +119,15 @@ export default function ProjectInfo({ project }: Prop) {
                         <div className="h-[85vh] flex items-center justify-center relative">
                             <div className="w-[80%] h-[96%] relative">
                                 <Image
-                                    src="/gighub.png"
+                                    src={project.src}
                                     alt="profile pic"
                                     fill
-                                    className="object-cover"
+                                    className="object-contain"
                                 />
                             </div>
 
                             <div className="absolute top-[-20%] right-[10%]">
-                                <MagneticButton text={"Project Link"} link={project.link}/>
+                                <MagneticButton text={"Project Link"} link={project.link} />
                             </div>
                         </div>
 
@@ -139,8 +139,8 @@ export default function ProjectInfo({ project }: Prop) {
 
                                 <div className="bg-black p-6 rounded-xs">
                                     <Image
-                                        src="/gighub.png"
-                                        alt="profile pic"
+                                        src={project.featurePic}
+                                        alt="feature pic"
                                         width={900}
                                         height={800}
                                         className="object-cover rounded-xs"
@@ -153,22 +153,23 @@ export default function ProjectInfo({ project }: Prop) {
                         <div className="h-[60vh] flex items-center justify-center bg-[#1d1d1d] relative z-[100]">
                             <div className="w-[80%] h-[90%] relative">
                                 <Image
-                                    src="/gighub.png"
-                                    alt="profile pic"
+                                    src={project.advertisementPic}
+                                    alt="ad pic"
                                     fill
-                                    className="object-cover"
+                                    className="object-contain"
                                 />
                                 <p
                                     className="
                                     absolute 
-                                    top-[80%] 
+                                    bottom-[10%] 
                                     right-[5%] 
-                                    -translate-y-1/2
                                     text-[1.8rem] 
                                     font-semibold 
                                     px-6 
                                     py-4 
-                                    shadow-2xl
+                                    bg-black/60
+                                    text-white
+                                    rounded-xl
                                     backdrop-blur-md
                                 "
                                 >
@@ -176,7 +177,7 @@ export default function ProjectInfo({ project }: Prop) {
                                 </p>
                             </div>
                         </div>
- 
+
                         <ProjectFooter />
                     </main>
                 )
