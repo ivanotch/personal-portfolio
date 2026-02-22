@@ -12,6 +12,7 @@ export default function Contact() {
 
     const [showLoader, setShowLoader] = useState(true);
     const locoRef = useRef<any>(null);
+    const [isSending, setIsSending] = useState(false);
 
     // prevent scrolling while loading
     useEffect(() => {
@@ -55,6 +56,10 @@ export default function Contact() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if (isSending) return; // prevent double click
+
+        setIsSending(true);
+
         const form = e.currentTarget
         const formData = new FormData(form);
 
@@ -87,6 +92,8 @@ export default function Contact() {
         } catch (error) {
             console.error(error);
             alert("Failed to send message.");
+        } finally {
+            setIsSending(false);
         }
     };
 
@@ -234,9 +241,23 @@ export default function Contact() {
                                     {/* Submit Button */}
                                     <button
                                         type="submit"
-                                        className="mt-2 bg-blue-600 text-white font-semibold rounded-lg px-4 py-2 hover:bg-blue-700 transition-all duration-200"
+                                        disabled={isSending}
+                                        className={`mt-2 flex items-center justify-center gap-2 
+                                            rounded-lg px-4 py-2 font-semibold text-white 
+                                            transition-all duration-200
+                                            ${isSending
+                                                ? "bg-blue-400 cursor-not-allowed"
+                                                : "bg-blue-600 hover:bg-blue-700"
+                                            }`}
                                     >
-                                        Send Message
+                                        {isSending ? (
+                                            <>
+                                                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                                                Sending...
+                                            </>
+                                        ) : (
+                                            "Send Message"
+                                        )}
                                     </button>
                                 </form>
                             </motion.div>
