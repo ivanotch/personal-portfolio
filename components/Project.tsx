@@ -11,7 +11,6 @@ interface ProjectProps {
     index: number;
     title: string;
     task: string;
-    year: string;
     setModal: React.Dispatch<React.SetStateAction<ModalState>>;
 }
 
@@ -20,7 +19,6 @@ export default function Project({
     id,
     title,
     task,
-    year,
     setModal,
 }: ProjectProps) {
     return (
