@@ -52,6 +52,44 @@ export default function Contact() {
         return () => locoRef.current?.destroy();
     }, []);
 
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const form = e.currentTarget
+        const formData = new FormData(form);
+
+        const templateParams = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            subject: formData.get("subject"),
+            message: formData.get("message"),
+        };
+
+        try {
+            const emailjs = (await import("@emailjs/browser")).default;
+
+            await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE!,
+                templateParams,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+            );
+
+            await emailjs.send(
+                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+                process.env.NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE!,
+                templateParams,
+                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+            );
+
+            alert("Message sent!");
+            form.reset();
+        } catch (error) {
+            console.error(error);
+            alert("Failed to send message.");
+        }
+    };
+
     return (
 
         <AnimatePresence mode="wait">
@@ -143,13 +181,29 @@ export default function Contact() {
                             >
                                 <h2 className="font-semibold bg-gray-300 p-2 w-full  text-black">Send Me an Email</h2>
 
-                                <form className="flex flex-col p-2 ">
+                                <form
+                                    id="contact-form"
+                                    onSubmit={handleSubmit}
+                                    className="flex flex-col p-2"
+                                >
                                     {/* Email */}
+                                    <div className="pl-2 flex items-center  border-y border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent">
+                                        <label htmlFor="name" className="text-gray-600 font-medium">Name</label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            name="name"
+                                            placeholder="Enter Your name"
+                                            className="px-2 py-2 focus:outline-none "
+                                        />
+                                    </div>
+
                                     <div className="pl-2 flex items-center  border-y border-gray-300 focus:ring-2 focus:ring-blue-400 focus:border-transparent">
                                         <label htmlFor="email" className="text-gray-600 font-medium">From</label>
                                         <input
                                             type="email"
                                             id="email"
+                                            name="email"
                                             placeholder="Enter Your Email"
                                             className="px-2 py-2 focus:outline-none "
                                         />
@@ -160,6 +214,7 @@ export default function Contact() {
                                         <input
                                             type="text"
                                             id="subject"
+                                            name="subject"
                                             placeholder="Subject"
                                             className="px-2 py-2 w-full focus:outline-none"
                                         />
@@ -169,6 +224,7 @@ export default function Contact() {
                                     <div className="flex flex-col mt-[1rem]">
                                         <textarea
                                             id="message"
+                                            name="message"
                                             rows={5}
                                             placeholder="Write your message here..."
                                             className="border-x  border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent resize-none"
