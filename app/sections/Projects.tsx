@@ -118,7 +118,7 @@ export default function Projects() {
             <div className="text-[1.3rem] mb-[2rem] ml-[10%] text-gray-400">Projects</div>
             <div className=" mx-[auto] w-[80%]">
                 {projects.map((project, index) => {
-                    return <Project key={index} index={index} id={project.id} src={project.src} advertisementPic={project.advertisementPic} featurePic={project.advertisementPic} title={project.title} task={project.task} year={project.year} setModal={setModal} />
+                    return <Project key={index} index={index} id={project.id} title={project.title} task={project.task} setModal={setModal} />
                 })}
             </div>
             <FloatingModal modal={modal} projects={projects} />
