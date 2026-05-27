@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useSpring } from "framer-motion";
-import Specialty from "./Specialty"
+import Specialty from "./Specialty";
 
 export default function CertificateShowcase() {
 
@@ -15,7 +15,10 @@ export default function CertificateShowcase() {
     });
 
     const yFast = useTransform(scrollYProgress, [0, 1], [0, 100]);
-    const smoothFast = useSpring(yFast, { stiffness: 200, damping: 80 });
+    const smoothFast = useSpring(yFast, {
+        stiffness: 200,
+        damping: 80
+    });
 
     const certs = [
         {
@@ -43,40 +46,165 @@ export default function CertificateShowcase() {
             src: "/certificate/udemy.jpg",
             bg: "bg-[#d7d4cf]"
         },
-    ]
+    ];
 
     return (
-        <main ref={containerRef} className="relative">
-            <div className="absolute left-[9%] top-[4%]">
-                <p className="text-[12em] tracking-widest font-semibold text-gray-300 font-inter">Certificates</p>
+        <main
+            ref={containerRef}
+            className="relative"
+        >
+
+            {/* Heading */}
+            <div
+                className="
+                    relative
+                    px-6 md:px-0
+                    pt-[4rem] md:pt-0
+                    md:absolute md:left-[9%] md:top-[4%]
+                    z-[5]
+                "
+            >
+                <p
+                    className="
+                        text-[3rem]
+                        leading-none
+                        sm:text-[4rem]
+                        md:text-[12em]
+                        tracking-wide md:tracking-widest
+                        font-semibold
+                        text-gray-300
+                        font-inter
+                    "
+                >
+                    Certificates
+                </p>
             </div>
-            {/* Description */}
-            <div className="min-h-[100vh] pt-[14rem] relative gap-40">
-                <div className="w-[20%] left-[12%] mt-[2rem] absolute flex flex-col gap-5 mb-[5rem]">
-                    <p className=" text-[1.3em]  mt-[6rem] font-semibold">
-                        Beyond my academic background, I've earned certifications from specialized development courses to refine my practical skills in modern web and mobile technologies.
+
+            {/* Main Content */}
+            <div
+                className="
+                    min-h-[100vh]
+                    pt-[3rem] md:pt-[14rem]
+                    relative
+                    flex flex-col md:block
+                    gap-16 md:gap-40
+                    px-6 md:px-0
+                "
+            >
+
+                {/* Description */}
+                <div
+                    className="
+                        w-full md:w-[20%]
+                        md:left-[12%]
+                        md:absolute
+                        md:mt-[2rem]
+                        flex flex-col gap-5
+                        text-center md:text-left
+                        mb-[2rem] md:mb-[5rem]
+                    "
+                >
+                    <p
+                        className="
+                            text-[1rem]
+                            leading-[1.8rem]
+                            md:text-[1.3em]
+                            md:mt-[6rem]
+                            font-semibold
+                        "
+                    >
+                        Beyond my academic background, I've earned
+                        certifications from specialized development
+                        courses to refine my practical skills in
+                        modern web and mobile technologies.
                     </p>
+
                     <p className="text-gray-500 font-semibold">
                         Striving for Knowledge..
                     </p>
                 </div>
 
-                {/* Cards */}
-                <div className="absolute right-[10%] flex flex-col gap-5 w-[50%]">
-                    {/* Top row: 3 cards */}
-                    <div className="flex justify-center gap-5">
+                {/* Certificate Cards */}
+                <div
+                    className="
+                        w-full md:w-[50%]
+                        md:absolute md:right-[10%]
+                        flex flex-col gap-5
+                    "
+                >
+
+                    {/* Top Row */}
+                    <div
+                        className="
+                            grid grid-cols-1
+                            sm:grid-cols-2
+                            md:flex
+                            justify-center
+                            gap-5
+                        "
+                    >
                         {certs.slice(0, 3).map((cert, index) => (
-                            <motion.div style={{ y: smoothFast }} key={index} className={`flex flex-col items-center p-4 ${cert.bg} shadow-xl w-70`}>
-                                <img src={cert.src} alt={cert.name} className="w-full h-40 object-cover rounded-xl mb-4" />
+                            <motion.div
+                                style={{ y: smoothFast }}
+                                key={index}
+                                className={`
+                                    flex flex-col items-center
+                                    p-4
+                                    ${cert.bg}
+                                    shadow-xl
+                                    rounded-xl
+                                    w-full md:w-70
+                                `}
+                            >
+                                <img
+                                    src={cert.src}
+                                    alt={cert.name}
+                                    className="
+                                        w-full
+                                        h-52 md:h-40
+                                        object-cover
+                                        rounded-xl
+                                        mb-4
+                                    "
+                                />
                             </motion.div>
                         ))}
                     </div>
 
-                    {/* Bottom row: 2 cards */}
-                    <div className="flex justify-center gap-5">
+                    {/* Bottom Row */}
+                    <div
+                        className="
+                            grid grid-cols-1
+                            sm:grid-cols-2
+                            md:flex
+                            justify-center
+                            gap-5
+                        "
+                    >
                         {certs.slice(3, 5).map((cert, index) => (
-                            <motion.div style={{y: smoothFast}} key={index} className={`flex flex-col items-center p-4 ${cert.bg} shadow-xl w-70`}>
-                                <img src={cert.src} alt={cert.name} className="w-full h-40 object-cover rounded-xl mb-4" />
+                            <motion.div
+                                style={{ y: smoothFast }}
+                                key={index}
+                                className={`
+                                    flex flex-col items-center
+                                    p-4
+                                    ${cert.bg}
+                                    shadow-xl
+                                    rounded-xl
+                                    w-full md:w-70
+                                `}
+                            >
+                                <img
+                                    src={cert.src}
+                                    alt={cert.name}
+                                    className="
+                                        w-full
+                                        h-52 md:h-40
+                                        object-cover
+                                        rounded-xl
+                                        mb-4
+                                    "
+                                />
                             </motion.div>
                         ))}
                     </div>
@@ -85,5 +213,5 @@ export default function CertificateShowcase() {
 
             <Specialty />
         </main>
-    )
+    );
 }

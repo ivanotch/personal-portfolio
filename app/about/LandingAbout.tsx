@@ -68,15 +68,34 @@ export default function LandingAbout() {
         >
             {/* Locomotive Scroll container */}
             <div id="about-page" className="overflow-hidden">
-                <div className="relative min-h-[100vh] bg-[#e9eaeb]">
+                <div className="relative min-h-[100vh] bg-[#e9eaeb] pb-[8rem] md:pb-0">
                     <Nav />
 
-                    <div className="w-[80%] mx-auto mt-[5%] overflow-hidden flex justify-between gap-10 z-[10]">
+                    <div
+                        className="
+                    w-[90%] md:w-[80%]
+                    mx-auto
+                    mt-[10%] md:mt-[5%]
+                    overflow-hidden
+                    flex flex-col md:flex-row
+                    justify-between
+                    gap-10
+                    z-[10]
+                    items-center md:items-start
+                "
+                    >
 
                         {/* Sticky Image */}
                         <motion.div
-                            ref={heroContainer} style={{ y }}
-                            className="relative h-[35rem] w-[29rem] z-[1]"
+                            ref={heroContainer}
+                            style={{ y }}
+                            className="
+                        relative
+                        h-[22rem] w-[18rem]
+                        md:h-[35rem] md:w-[29rem]
+                        z-[1]
+                        shrink-0
+                    "
                             data-scroll
                             data-scroll-sticky
                             data-scroll-speed="0.9"
@@ -85,7 +104,7 @@ export default function LandingAbout() {
                                 src="/small-avatar.png"
                                 alt="profile pic"
                                 fill
-                                className="object-cover"
+                                className="object-cover rounded-lg"
                             />
                         </motion.div>
 
@@ -93,19 +112,75 @@ export default function LandingAbout() {
                         <div
                             data-scroll
                             data-scroll-speed="2"
-                            className="w-[33rem] flex flex-col gap-5 pt-[4rem]"
+                            className="
+                        w-full md:w-[33rem]
+                        flex flex-col gap-5
+                        pt-0 md:pt-[4rem]
+                        text-center md:text-left
+                    "
                         >
-                            <p className="text-2xl">
-                                I’m a computer science student and aspiring full-stack developer. I build web applications with Next.js and React, handle backend logic, and work with databases like Firebase, MongoDB, and PostgreSQL. I’m also familiar with mobile development using React Native and Expo.
+                            <p
+                                className="
+                            text-[1.1rem]
+                            leading-[1.9rem]
+                            md:text-2xl
+                            md:leading-normal
+                        "
+                            >
+                                I’m a computer science student and aspiring
+                                full-stack developer. I build web applications
+                                with Next.js and React, handle backend logic,
+                                and work with databases like Firebase, MongoDB,
+                                and PostgreSQL. I’m also familiar with mobile
+                                development using React Native and Expo.
                             </p>
-                            <div>Ready to learn..</div>
+
+                            <div className="text-[1rem] md:text-base">
+                                Ready to learn..
+                            </div>
                         </div>
 
                     </div>
-                    <div className="absolute top-[calc(100vh-300px)] z-[1000]">
-                        <div ref={slider} className="relative whitespace-nowrap flex">
-                            <p ref={firstText} className="m-[0px] text-[240px] text-black font-500"> Ivan Babida - Ivan Babida - </p>
-                            <p ref={secondText} className="m-[0px] text-[240px] text-black font-500 absolute left-[100%]"> Ivan Babida - Ivan Babida - </p>
+
+                    {/* Scrolling Text */}
+                    <div
+                        className="
+                            absolute
+                            top-[calc(110vh)]
+                            md:top-[calc(100vh-300px)]
+                            z-[1000]
+                        "
+                    >
+                        <div
+                            ref={slider}
+                            className="relative whitespace-nowrap flex"
+                        >
+                            <p
+                                ref={firstText}
+                                className="
+                                    m-[0px]
+                                    text-[80px]
+                                    md:text-[240px]
+                                    text-black
+                                    font-500
+                                "
+                            >
+                                Ivan Babida - Ivan Babida -
+                            </p>
+
+                            <p
+                                ref={secondText}
+                                className="
+                            m-[0px]
+                            text-[80px]
+                            md:text-[240px]
+                            text-black
+                            font-500
+                            absolute left-[100%]
+                        "
+                            >
+                                Ivan Babida - Ivan Babida -
+                            </p>
                         </div>
                     </div>
                 </div>

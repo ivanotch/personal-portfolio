@@ -162,15 +162,30 @@ export default function Footer() {
     }, [])
 
     return (
-        <motion.footer ref={container} style={{ y }} className="bg-white flex flex-col z-[1] items-center justify-center relative">
+        <motion.footer
+            ref={container}
+            style={{ y }}
+            className="bg-white flex flex-col z-[1] items-center justify-center relative overflow-hidden"
+        >
+            {/* Footer Content */}
+            <div className="pt-[90px] md:pt-[150px] w-full bg-white">
 
-            {/* motion.Footer Content */}
-            <div className="pt-[150px] w-[100%] bg-white">
-
-                <div onClick={() => router.push("/projects")} className="w-[60%] h-[30vh] mx-auto flex items-center justify-center">
+                {/* CTA */}
+                <div
+                    onClick={() => router.push("/projects")}
+                    className="w-[90%] md:w-[60%] min-h-[20vh] md:h-[30vh] mx-auto flex items-center justify-center"
+                >
                     <div
                         ref={buttonRef}
-                        className="relative overflow-hidden rounded-full bg-[#1d1d1d] text-white px-10 py-4 flex items-center gap-3 cursor-pointer"
+                        className="
+                    relative overflow-hidden rounded-full
+                    bg-[#1d1d1d] text-white
+                    px-7 md:px-10
+                    py-4
+                    flex items-center gap-3
+                    cursor-pointer
+                    text-[0.95rem] md:text-[1rem]
+                "
                     >
                         {/* Animated Blue Layer */}
                         <span
@@ -180,31 +195,71 @@ export default function Footer() {
                         />
 
                         {/* Content */}
-                        <span ref={textRef} className="relative z-10 flex items-center gap-3">
+                        <span
+                            ref={textRef}
+                            className="relative z-10 flex items-center gap-3"
+                        >
                             View More
-                            <span className="text-[1.5rem]">
+                            <span className="text-[1.2rem] md:text-[1.5rem]">
                                 <CiLocationArrow1 />
                             </span>
                         </span>
                     </div>
                 </div>
 
-                <div className="flex justify-between m-[3rem]">
-                    <div className="flex gap-5">
+                {/* Bottom Footer */}
+                <div
+                    className="
+                flex flex-col md:flex-row
+                justify-between
+                gap-10 md:gap-0
+                px-6 md:px-12
+                py-10
+            "
+                >
+                    {/* Left */}
+                    <div
+                        className="
+                    flex flex-col sm:flex-row
+                    gap-8 sm:gap-10
+                "
+                    >
                         <span>
-                            <h3 className="text-gray-500 font-semibold">Version</h3>
-                            <p>2026 © Edition</p>
+                            <h3 className="text-gray-500 font-semibold text-sm md:text-base">
+                                Version
+                            </h3>
+                            <p className="text-sm md:text-base">
+                                2026 © Edition
+                            </p>
                         </span>
+
                         <span>
-                            <h3 className="text-gray-500 font-semibold">Local Time</h3>
-                            <p>
-                                {formattedTime} GMT{timezoneOffset >= 0 ? `+${timezoneOffset}` : timezoneOffset}
+                            <h3 className="text-gray-500 font-semibold text-sm md:text-base">
+                                Local Time
+                            </h3>
+
+                            <p className="text-sm md:text-base">
+                                {formattedTime} GMT
+                                {timezoneOffset >= 0
+                                    ? `+${timezoneOffset}`
+                                    : timezoneOffset}
                             </p>
                         </span>
                     </div>
-                    <div>
-                        <h3 className="text-gray-500 font-semibold">socials</h3>
-                        <div className="flex gap-5 mt-2">
+
+                    {/* Right */}
+                    <div className="w-full md:w-auto">
+                        <h3 className="text-gray-500 font-semibold text-sm md:text-base">
+                            socials
+                        </h3>
+
+                        <div
+                            className="
+                        flex flex-wrap
+                        gap-4 md:gap-5
+                        mt-3
+                    "
+                        >
                             {socials.map((social, index) => (
                                 <div key={social.name} className="relative">
                                     <a
@@ -212,16 +267,27 @@ export default function Footer() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         ref={addLinkRef}
-                                        className="relative cursor-pointer inline-block px-1"
+                                        className="
+                                    relative cursor-pointer inline-block
+                                    px-1
+                                    text-sm md:text-base
+                                "
                                         onMouseEnter={() => handleHover(index)}
                                         onMouseLeave={() => handleHoverOut(index)}
-                                        onMouseMove={(e) => handleMouseMove(index, e)}
+                                        onMouseMove={(e) =>
+                                            handleMouseMove(index, e)
+                                        }
                                     >
                                         {social.name}
-                                        {/* line under text */}
+
+                                        {/* underline */}
                                         <div
                                             ref={addLineRef}
-                                            className="absolute left-0 -bottom-1 w-full h-[2px] bg-black scale-x-0"
+                                            className="
+                                        absolute left-0 -bottom-1
+                                        w-full h-[2px]
+                                        bg-black scale-x-0
+                                    "
                                         />
                                     </a>
                                 </div>

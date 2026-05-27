@@ -56,7 +56,7 @@ export default function AboutMe() {
             {showLoader && <PageTransition key="preloader" title="About Me" />}
 
             {!showLoader && (
-                <div id="about-page">
+                <div id="about-page" className="overflow-hidden">
                     <LandingAbout />
                     <CertificateShowcase />
                     <Footer />

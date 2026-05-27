@@ -155,16 +155,24 @@ export default function Advertise() {
 
     return (
         <div
-            className="h-[40vh]"
+            className="min-h-[40vh] px-6 md:px-0"
         >
-            <div className="flex w-[65%] mx-[auto] mt-[11rem]">
-                <h4 className="pr-[2rem]">
-                    <span ref={firstSentence} className="fsentence text-[2rem]">I value clean code, feedback, and collaboration. I'm comfortable asking questions, learning from code reviews, and improving fast in team environments.</span>
+            <div className="flex flex-col md:flex-row
+            w-full md:w-[65%]
+            mx-auto
+            mt-[5rem] md:mt-[11rem]
+            gap-8 md:gap-0">
+                <h4 className="md:pr-[2rem] text-center md:text-left">
+                    <span ref={firstSentence} className="fsentence
+                    text-[1.4rem]
+                    leading-[1.8rem]
+                    md:text-[2rem]
+                    md:leading-normal">I value clean code, feedback, and collaboration. I'm comfortable asking questions, learning from code reviews, and improving fast in team environments.</span>
                 </h4>
 
                 <div className="pl-[2rem] w-[100%] p-2">
-                    <p ref={littleText} className="text-[1.2em]">
-                        Driven by curiosity and purpose, I build solutions that connect technology and people.
+                    <p ref={littleText} className="text-[1rem] md:text-[1.2em]">
+                        Driven by curiosity and purpose, I build systems that people actually need.
                     </p>
                     <div onClick={() => router.push('/about')} ref={magneticButton} className="cursor-pointer p-5 h-30 w-30 mt-[1.6rem] bg-black rounded-full flex items-center justify-center">
                         <span className="hover-bg absolute inset-0 bg-blue-600 rounded-full scale-0" />

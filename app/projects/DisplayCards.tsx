@@ -80,12 +80,41 @@ export default function DisplayCards() {
 
     return (
         <main ref={specialtyRef} className="relative bg-white  z-[100]">
-            <div className="font-[inter] text-[4rem] mx-[auto] w-[60%] mt-[6rem] font-semibold">
+            <div className="
+                font-[inter]
+                text-[2.2rem]
+                sm:text-[3rem]
+                md:text-[4rem]
+                leading-tight
+                mx-auto
+                w-[90%]
+                md:w-[60%]
+                mt-[4rem]
+                md:mt-[6rem]
+                font-semibold
+            ">
                 Building thoughtful digital experiences
             </div>
 
-            <div className=" flex items-center w-[80%] mx-[auto] justify-between mt-[3rem]">
-                <div className="flex gap-4">
+            <div className="
+                flex
+                flex-col
+                md:flex-row
+                items-start
+                md:items-center
+                gap-6
+                w-[90%]
+                md:w-[80%]
+                mx-auto
+                justify-between
+                mt-[2rem]
+                md:mt-[3rem]
+            ">
+                <div className="
+                    flex
+                    flex-wrap
+                    gap-3
+                ">
                     {categories.map((item, index) => (
                         <div
                             key={item}
@@ -95,7 +124,7 @@ export default function DisplayCards() {
                                 console.log(filter)
                             }}
                             onMouseLeave={handleMagneticLeave}
-                            className={`relative cursor-pointer overflow-hidden px-8 py-4 border rounded-full group transition-all duration-300
+                            className={`relative cursor-pointer overflow-hidden px-5 md:px-8 py-3 md:py-4 border rounded-full group transition-all duration-300
                                  ${filter === item
                                     ? "bg-[#1d1d1d] text-white border-[#1d1d1d]"
                                     : "border-black text-black"
@@ -113,7 +142,7 @@ export default function DisplayCards() {
                     ))}
                 </div>
 
-                <div className="flex gap-5 py-2">
+                <div className="flex gap-3 py-2 self-end md:self-auto">
                     <div
                         onMouseMove={handleMagneticMove}
                         onClick={() => setLayout("list")}
@@ -160,7 +189,7 @@ export default function DisplayCards() {
             {
                 layout === "list" ? (
                     <div className="my-[2rem]">
-                        <div className=" mx-[auto] w-[80%]">
+                        <div className="mx-auto w-[92%] md:w-[80%]">
                             {filteredProjects.map((project, index) => {
                                 return <Project key={index} id={project.id} index={index} title={project.title} task={project.task} setModal={setModal} />
                             })}
@@ -168,7 +197,19 @@ export default function DisplayCards() {
                         <FloatingModal modal={modal} projects={projects} />
                     </div>
                 ) : (
-                    <div className="mx-auto mt-[3rem] mb-[4rem] w-[80%] grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div className="
+                        mx-auto
+                        mt-[2rem]
+                        md:mt-[3rem]
+                        mb-[4rem]
+                        w-[92%]
+                        md:w-[80%]
+                        grid
+                        grid-cols-1
+                        md:grid-cols-2
+                        gap-6
+                        md:gap-10
+                    ">
                         {filteredProjects.map((project, index) => (
                             <ProjectBox
                                 key={project.id}

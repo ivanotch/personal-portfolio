@@ -13,7 +13,6 @@ type ModalState = {
     index: number;
 };
 
-
 export default function Projects() {
 
     const sectionRef = useRef<HTMLElement>(null);
@@ -35,6 +34,9 @@ export default function Projects() {
         const text = textRef.current;
 
         if (!button || !bg || !text) return;
+
+        // Disable magnetic effect on mobile
+        const isMobile = window.innerWidth < 768;
 
         // Initial state of blue background
         gsap.set(bg, {
@@ -76,8 +78,10 @@ export default function Projects() {
             });
         };
 
-        // Magnetic effect
+        // Magnetic effect (desktop only)
         const move = (e: MouseEvent) => {
+            if (isMobile) return;
+
             const rect = button.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
@@ -91,6 +95,8 @@ export default function Projects() {
         };
 
         const resetMagnetic = () => {
+            if (isMobile) return;
+
             gsap.to(button, {
                 x: 0,
                 y: 0,
@@ -112,21 +118,45 @@ export default function Projects() {
         };
     }, []);
 
-
     return (
-        <main ref={sectionRef} data-bg-color="#1D1D1D" className="h-[100vh] mt-[2rem]">
-            <div className="text-[1.3rem] mb-[2rem] ml-[10%] text-gray-400">Projects</div>
-            <div className=" mx-[auto] w-[80%]">
+        <main
+            ref={sectionRef}
+            data-bg-color="#1D1D1D"
+            className="min-h-screen mt-[2rem] px-4 md:px-0"
+        >
+            <div className="text-[1rem] md:text-[1.3rem] mb-[2rem] md:ml-[10%] text-gray-400">
+                Projects
+            </div>
+
+            <div className="mx-auto w-full md:w-[80%]">
                 {projects.map((project, index) => {
-                    return <Project key={index} index={index} id={project.id} title={project.title} task={project.task} setModal={setModal} />
+                    return (
+                        <Project
+                            key={index}
+                            index={index}
+                            id={project.id}
+                            title={project.title}
+                            task={project.task}
+                            setModal={setModal}
+                        />
+                    );
                 })}
             </div>
+
             <FloatingModal modal={modal} projects={projects} />
-            <div className="flex items-center justify-center mt-[1rem] mb-[2rem]">
+
+            <div className="flex items-center justify-center mt-[2rem] mb-[3rem]">
                 <button
                     onClick={() => router.push('/projects')}
                     ref={buttonRef}
-                    className="relative overflow-hidden py-5 px-7 border rounded-full text-black"
+                    className="
+                        relative overflow-hidden
+                        py-4 px-6 md:py-5 md:px-7
+                        border rounded-full
+                        text-black
+                        touch-manipulation
+                        z-20
+                    "
                 >
                     {/* Blue animated background */}
                     <span
@@ -135,7 +165,12 @@ export default function Projects() {
                     />
 
                     {/* Text */}
-                    <span ref={textRef} className="relative z-10">More Projects</span>
+                    <span
+                        ref={textRef}
+                        className="relative z-10 text-sm md:text-base"
+                    >
+                        More Projects
+                    </span>
                 </button>
             </div>
         </main>

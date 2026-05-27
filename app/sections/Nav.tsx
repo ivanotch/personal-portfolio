@@ -121,55 +121,71 @@ export default function Nav() {
 
 
     return (
-        <header className="flex p-[2rem] justify-between items-center">
-            <div
-                ref={parentRef}
-                onClick={() => router.push('/')}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-                className="ml-[30px] text-[1.1rem] flex gap-2 items-center font-poppins font-[600]"
-            >
-                <Slack size={24} ref={slackRef} color="#008000" />
-                <div className="mb-2 relative overflow-hidden h-[1.2em] w-[8rem]">
-                    <div ref={ivanotchRef} className={`${pathname === '/contact' ? 'text-white' : 'text-black'} absolute top-0 left-0 w-full`}>
-                        IVANOTCH
-                    </div>
-                    <div ref={realnameRef} className={`${pathname === '/contact' ? 'text-white' : 'text-black'} absolute top-0 left-0 w-full`}>
-                        Ivan Babida
-                    </div>
-                </div>
-            </div>
+        <header className="flex flex-col gap-4 md:flex-row p-[1rem] md:p-[2rem] justify-between items-center">
+    <div
+        ref={parentRef}
+        onClick={() => router.push('/')}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className="md:ml-[30px] text-[1rem] md:text-[1.1rem] flex gap-2 items-center font-poppins font-[600]"
+    >
+        <Slack size={24} ref={slackRef} color="#008000" />
 
-            <div className={`${pathname === '/contact' ? 'bg-white/90' : 'bg-white/20'} backdrop-blur-xl px-2 py-1 w-[15rem] rounded-xl flex justify-center`}>
-                <ul className="flex gap-[1rem] font-[inter]">
-                    <li>
-                        <MagneticLink href="/about">About Me</MagneticLink>
-                    </li>
-                    <li>:</li>
-                    <li><MagneticLink href="/projects">Projects</MagneticLink></li>
-                </ul>
+        <div className="mb-2 relative overflow-hidden h-[1.2em] w-[8rem]">
+            <div
+                ref={ivanotchRef}
+                className={`${pathname === '/contact' ? 'text-white' : 'text-black'} absolute top-0 left-0 w-full`}
+            >
+                IVANOTCH
             </div>
 
             <div
-                ref={isContact ? null : magneticRef}
-                onClick={!isContact ? () => router.push("/contact") : undefined}
-                className={`
-                    relative flex items-center justify-center
-                    mr-[30px] px-4 py-2 gap-[2.5rem]
-                    rounded-xl
-                    transition-all duration-500 ease-out
-                    ${isContact
-                                        ? "bg-blue-600 text-black shadow-lg shadow-blue-600/40 cursor-default"
-                                        : "bg-black text-white hover:bg-blue-600 cursor-pointer"}
-                `}
+                ref={realnameRef}
+                className={`${pathname === '/contact' ? 'text-white' : 'text-black'} absolute top-0 left-0 w-full`}
             >
-                <p>Get in Touch</p>
-                <ArrowUpRight
-                    size={24}
-                    color={isContact ? "#1d1d1d" : "#FFFFFF"}
-                />
+                Ivan Babida
             </div>
+        </div>
+    </div>
 
-        </header>
+    <div
+        className={`${pathname === '/contact' ? 'bg-white/90' : 'bg-white/20'} backdrop-blur-xl px-4 py-2 w-full max-w-[15rem] rounded-xl flex justify-center`}
+    >
+        <ul className="flex gap-[0.7rem] md:gap-[1rem] font-[inter] text-sm md:text-base">
+            <li>
+                <MagneticLink href="/about">About Me</MagneticLink>
+            </li>
+
+            <li>:</li>
+
+            <li>
+                <MagneticLink href="/projects">Projects</MagneticLink>
+            </li>
+        </ul>
+    </div>
+
+    <div
+        ref={isContact ? null : magneticRef}
+        onClick={!isContact ? () => router.push("/contact") : undefined}
+        className={`
+            relative flex items-center justify-center
+            md:mr-[30px]
+            px-4 py-2 gap-[1rem] md:gap-[2.5rem]
+            w-full max-w-[15rem] md:w-auto
+            rounded-xl
+            transition-all duration-500 ease-out
+            ${isContact
+                ? "bg-blue-600 text-black shadow-lg shadow-blue-600/40 cursor-default"
+                : "bg-black text-white hover:bg-blue-600 cursor-pointer"}
+        `}
+    >
+        <p className="text-sm md:text-base">Get in Touch</p>
+
+        <ArrowUpRight
+            size={24}
+            color={isContact ? "#1d1d1d" : "#FFFFFF"}
+        />
+    </div>
+</header>
     );
 }
